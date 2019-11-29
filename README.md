@@ -17,16 +17,16 @@
 <details><summary><b>答案</b></summary>
 	<p>
     
-	JavaScript语言类型分为两类：基础类型和引用类型；
+JavaScript语言类型分为两类：基础类型和引用类型；
 
-	基础类型： Number, String, Boolean, Null, Undefined, Symbol (ES6新增)；
+基础类型： `Number`, `String`, `Boolean`, `Null`, `Undefined`, `Symbol` (ES6新增)；
 
-	引用类型： Object；
+引用类型： `Object`；
     
   </p>
 </details>
 
-
+---
 
 ###### 2.`JavaScript`对象的底层数据结构是什么？
 
@@ -59,13 +59,13 @@
 <details><summary><b>Answer</b></summary>
 <p class="color: #333;">
 	
-	`undefined` 是 `Undefined` 类型的值，表示未定义。任何变量在赋值前都是 `Undefined` 类型，值为 `undefined` 。由于`undefined` 只是全局作用域下的一个属性（变量），并非关键字。`undefined` **属性的属性特性**
+`undefined` 是 `Undefined` 类型的值，表示未定义。任何变量在赋值前都是 `Undefined` 类型，值为 `undefined` 。由于`undefined` 只是全局作用域下的一个属性（变量），并非关键字。`undefined` **属性的属性特性**
 
-	|    属性名    | 属性值 |
-	| :----------: | :----: |
-	|   writable   | false  |
-	|  enumerable  | false  |
-	| configurable | false  |
+|    属性名    | 属性值 |
+| :----------: | :----: |
+|   writable   | false  |
+|  enumerable  | false  |
+| configurable | false  |
 
   全局作用下的undefined 不能 被重新，而在函数作用域内是可以随意改下undefined 的。这也是建议使用 void 0 来表示 undefined 的来源。
 
