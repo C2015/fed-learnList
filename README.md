@@ -42,6 +42,32 @@
 
 7.`null`和`undefined`的区别
 
+<details><summary><b>Answer</b></summary>
+<p>
+  `undefined` 是 `Undefined` 类型的值，表示未定义。任何变量在赋值前都是 `Undefined` 类型，值为 `undefined` 。由于`undefined` 只是全局作用域下的一个属性（变量），并非关键字。`undefined` **属性的属性特性**
+
+|    属性名    | 属性值 |
+| :----------: | :----: |
+|   writable   | false  |
+|  enumerable  | false  |
+| configurable | false  |
+
+  全局作用下的undefined 不能 被重新，而在函数作用域内是可以随意改下undefined 的。这也是建议使用 void 0 来表示 undefined 的来源。
+
+```javascript
+window.undefined = 1; // false
+function setUndefiend(){
+    let undefined = 1;
+    console.log(undefined); // 1
+    console.log(undefined === void 0); // false
+}
+setUndefined();
+```
+
+  `Null` 类型也只有一个值，就是 ` null`，它的语义表示空值，与 `undefined` 不同，`null` 是 `JavaScript` 关键字，所以在任何代码中，你都可以放心用 `null` 关键字来获取 `null` 值。
+</p>
+</details>
+
 8.至少可以说出三种判断`JavaScript`数据类型的方式，以及他们的优缺点，如何准确的判断数组类型
 
 9.可能发生隐式类型转换的场景以及转换原则，应如何避免或巧妙应用
