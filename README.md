@@ -16,14 +16,13 @@
 
 <details><summary><b>答案</b></summary>
 	<p>
-    JavaScript语言类型分为两类：基础类型和引用类型；
+    ```
+	JavaScript语言类型分为两类：基础类型和引用类型；
 
     基础类型： `Number`, `String`, `Boolean`, `Null`,` Undefined`,` Symbol` (ES6新增)；
 
     引用类型： `Object`；
-    
-    ---
-    
+    ```
   </p>
 </details>
 
