@@ -21,10 +21,13 @@
     基础类型： `Number`, `String`, `Boolean`, `Null`,` Undefined`,` Symbol` (ES6新增)；
 
     引用类型： `Object`；
+    
+    ---
+    
   </p>
 </details>
 
----
+
 
 ###### 2.`JavaScript`对象的底层数据结构是什么？
 
