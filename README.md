@@ -56,7 +56,7 @@ JavaScript语言类型分为两类：基础类型和引用类型；
 
 ###### 7.`null`和`undefined`的区别
 
-<details><summary><b>Answer</b></summary>
+<details><summary><b>答案</b></summary>
 <p class="color: #333;">
 	
 `undefined` 是 `Undefined` 类型的值，表示未定义。任何变量在赋值前都是 `Undefined` 类型，值为 `undefined` 。由于`undefined` 只是全局作用域下的一个属性（变量），并非关键字。`undefined` **属性的属性特性**
@@ -67,7 +67,7 @@ JavaScript语言类型分为两类：基础类型和引用类型；
 |  enumerable  | false  |
 | configurable | false  |
 
-  全局作用下的undefined 不能 被重新，而在函数作用域内是可以随意改下undefined 的。这也是建议使用 void 0 来表示 undefined 的来源。
+  全局作用下的 `undefined` 不能被重写，而在函数作用域内是可以随意改写 `undefined` 的。这也是建议使用 `void 0` 来表示 `undefined` 的来源
 
 ```javascript
 window.undefined = 1; // false
@@ -87,6 +87,22 @@ setUndefined();
 
 ###### 8.至少可以说出三种判断`JavaScript`数据类型的方式，以及他们的优缺点，如何准确的判断数组类型
 
+<details><summary><b>答案</b></summary>
+<p class="color: #333;">
+
+
+|              方法              |                    优点                     |                             缺点                             |
+| :----------------------------: | :-----------------------------------------: | :----------------------------------------------------------: |
+|             typeof             |        简单，对基础类型检测新能好。         | 只能校验基础类型，而且typeof null === 'object' （JS 设计初的bug） |
+| Object.prototype.toString.call |              所有类型都能检测               |             写起来比较繁琐，性能不如 typeof 好；             |
+|           instanceof           |              能检测出引用类型               |                      不能检测出基础类型                      |
+|          constructor           | 基本能检测所有的类型（除了null和undefined） |                  constructor易被修改,不可靠                  |
+
+[性能对比](https://jsperf.com/js-type-check)
+
+[详情使用方法连接](https://github.com/mqyqingfeng/Blog/issues/28)	
+</p>
+</details>
 ---
 
 ###### 9.可能发生隐式类型转换的场景以及转换原则，应如何避免或巧妙应用
