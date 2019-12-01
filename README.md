@@ -12,7 +12,7 @@
 
 ### 变量和类型
 
-###### 1.`JavaScript`规定了几种语言类型？
+###### 1.`JavaScript`规定了几种语言类型？难度：⭐️
 
 <details><summary><b>答案</b></summary>
 	<p>
@@ -28,17 +28,17 @@ JavaScript语言类型分为两类：基础类型和引用类型；
 
 ---
 
-###### 2.`JavaScript`对象的底层数据结构是什么？
+###### 2.`JavaScript`对象的底层数据结构是什么？难度：⭐️⭐️⭐️⭐️⭐️
 
 <details><summary><b>答案</b></summary>
 <p>
-  
+  这题难度有点大，看不明白可以先跳过。[从Chrome源码看JS Object的实现](https://zhuanlan.zhihu.com/p/26169639)
 </p>
 </details>
 
 ---
 
-###### 3.`Symbol`类型在实际开发中的应用、可手动实现一个简单的`Symbol`
+###### 3.`Symbol`类型在实际开发中的应用、可手动实现一个简单的`Symbol`？难度：⭐️⭐️⭐️
 
 ---
 
@@ -54,7 +54,7 @@ JavaScript语言类型分为两类：基础类型和引用类型；
 
 ---
 
-###### 7.`null`和`undefined`的区别
+###### 7.`null`和`undefined`的区别？难度：⭐️⭐️
 
 <details><summary><b>答案</b></summary>
 <p class="color: #333;">
@@ -85,7 +85,7 @@ setUndefined();
 
 ---
 
-###### 8.至少可以说出三种判断`JavaScript`数据类型的方式，以及他们的优缺点，如何准确的判断数组类型
+###### 8.至少可以说出三种判断`JavaScript`数据类型的方式，以及他们的优缺点，如何准确的判断数组类型？难度：⭐️⭐️
 
 <details><summary><b>答案</b></summary>
 <p class="color: #333;">
