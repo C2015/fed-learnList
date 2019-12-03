@@ -42,8 +42,7 @@ JavaScript语言类型分为两类：基础类型和引用类型；
 
 <details>
 	<summary><b>答案</b></summary>
-<p>
-	
+<p>	
 > 在我看来，symbol更多是应用于es6规范中，由于它的值唯一的特性，可以解决变量名，属性名冲突的问题，并切Symbol提出了一些属性和方法，用于过渡以及实现一些特殊的用途，比如对象的迭代器，instanceof的拓展等等。
 
 实际使用 `symnol` 主要是使用它的唯一性特性；用来创建 `class` 类的私有属性（ps: 半私有，可以使用 `getOwnPropertySymbols`）。
