@@ -49,7 +49,7 @@ JavaScript语言类型分为两类：基础类型和引用类型；
 
 [手动实现 `Symbol`](https://github.com/mqyqingfeng/Blog/issues/87)。
 </p>
-</detail>
+</details>
 
 ---
 
@@ -99,7 +99,7 @@ setUndefined();
 ###### 8.至少可以说出三种判断`JavaScript`数据类型的方式，以及他们的优缺点，如何准确的判断数组类型？难度：⭐️⭐️
 
 <details><summary><b>答案</b></summary>
-<p class="color: #333;">
+<p>
 
 
 |              方法              |                    优点                     |                             缺点                             |
@@ -118,6 +118,35 @@ setUndefined();
 ---
 
 ###### 9.可能发生隐式类型转换的场景以及转换原则，应如何避免或巧妙应用
+
+<details><summary><b>答案</b></summary>
+<p>
+
+> 编码时应尽可能地将类型转换表达清楚，以免给别人留坑。类型转换越清晰，代码可读性越高，更容易理解。
+
+`+` 运算符
+
+`-` `*` `/` 强制将其他类型转化为数字类型
+
+`==` 宽松 (loose equals ) 类型转换(ps: 不建议使用，规则真心有点复杂，感兴趣可以去看下 《你不知道的JavaScript 中卷》 1.4章)
+
+**隐式强制类型转换为布尔值**
+
+1. `if(...)`语句中的条件判断表达式
+2. `for(...;...;...)`语句中的条件判断表达式(第二个)
+3. `while(...)` 和 `do...while(...)` 循环中的条件判断表达式
+4. `?:` 中的条件判断表达式
+5. 逻辑运算符 `||` 和 `&&` 左边的操作数
+
+| 类型    | Null      | Undefined   | Boolean(true) | Boolean(false) | Number                     | String             | Symbol     | Object     |
+| ------- | --------- | ----------- | ------------- | -------------- | -------------------------- | ------------------ | ---------- | ---------- |
+| Boolean | false     | false       | -             | -              | [0, NaN] - false<br />true | ''-false<br />true | true       | true       |
+| Number  | 0         | NaN         | 1             | 0              | -                          | *StringToNumber*   |            | *拆箱操作* |
+| String  | 'null'    | 'undefined' | 'true'        | 'false'        | *NumberToString*           | -                  | TypeError  | *拆箱操作* |
+| Object  | TypeError | TypeError   | *装箱操作*    | *装箱操作*     | *装箱操作*                 | *装箱操作*         | *装箱操作* | -          |
+
+</p>
+</details>
 
 ---
 
