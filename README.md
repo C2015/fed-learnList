@@ -1,18 +1,31 @@
+# 前端知识清单
+
 题目来源 @ConardLi 大神在掘金发表的[一名【合格】前端工程师的自检清单](https://juejin.im/post/5cc1da82f265da036023b628)。看到评论说希望能有答案，而自己又正好需要系统的补全前端知识地图。
 
-题目顺序有些微调，把相关题目放在一起。
+题目顺序有些微调，把相关题目放在一起。同时对部分题目有所更改 🤔
 
 简单的答案会直接写到对应的题目下面，而篇幅过长的答案会写入 issues；如果网上已有的答案将会直接粘贴对应的连接。答案有误欢迎大家指出，与君共勉，一起成长。
 
+## 系统学习指南
 
+> 切记一定要系统学习，知识清单只是用来差缺补漏的。
+
+**博客推荐：**
+1. JavaScript 基础这块推荐去看下 @冴羽 大大的博客，可以帮你系统的学习。[链接地址](https://github.com/mqyqingfeng/Blog)。
+
+**推荐书单：**
+1. JavaScript 高级程序设计
+2. 深入理解ES6
+
+## 知识清单
 
 ---
 
-## 一、JavaScript 基础
+### 一、JavaScript 基础
 
 > 前端工程师吃饭的家伙，深度、广度一样都不能差。
 
-### 变量和类型
+#### 变量和类型
 
 ###### 1.`JavaScript`规定了几种语言类型？难度：⭐️
 
@@ -65,6 +78,7 @@ JavaScript语言类型分为两类：基础类型和引用类型；
 
 1. 基础类型使用栈存储；基础类型赋值会从新创建一个基础值。
 2. 引用类型使用堆存储；栈中只是存储该对象的在堆中的地址。引用类型赋值只是把堆地址赋给新的变量。
+
 </p>
 </details>
 
@@ -231,7 +245,7 @@ String 类型会优先调用 toString ;
 
 ---
 
-###### 10.出现小数精度丢失的原因，`JavaScript`可以存储的最大数字、最大安全数字，`JavaScript`处理大数字的方法、避免精度丢失的方法
+###### 10.出现小数精度丢失的原因，`JavaScript`可以存储的最大数字、最大安全数字，`JavaScript`处理大数字的方法、避免精度丢失的方法 难度：⭐️⭐️⭐️⭐️
 
 <details><summary><b>答案</b></summary>
 <p>
@@ -240,31 +254,116 @@ String 类型会优先调用 toString ;
 </p>
 </details>
 
-### 原型和原型链
+---
+
+#### 原型和原型链
 
 
-##### 1.理解原型设计模式以及JavaScript中的原型规则
+##### 1.instanceof的底层实现原理，手动实现一个instanceof 难度：⭐️⭐️
 
+<details><summary><b>答案</b></summary>
+<p>
 
-##### 2.instanceof的底层实现原理，手动实现一个instanceof
+> instanceof 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。
 
+因为 instanceof 是个关键字，我们只能写一个函数 instanceofFn 来模拟 instanceof 功能。
 
-##### 4.实现继承的几种方式以及他们的优缺点
+```JS
+/*
+* obj 需要测试的实例
+* Constructor 构造函数
+*/
+var instanceofFn = function (obj, Constructor){
+    // 实例的 __proto__ 属性指向构造函数的 prototype 属性。
+    return obj.__proto__.constructor === Constructor ? true: false; 
+}
+function Foo(){};
+var foo = new Foo();
+var boo = {};
 
+console.log(instanceofFn(foo, Foo)) // true
+console.log(instanceofFn(boo, Foo)) //false
+```
 
-##### 5.至少说出一种开源项目(如Node)中应用原型继承的案例
+</p>
+</details>
 
+---
 
-##### 6.可以描述new一个对象的详细过程，手动实现一个new操作符
+##### 2.可以描述new一个对象的详细过程，手动实现一个new操作符 难度：⭐️⭐️
 
+<details><summary><b>答案</b></summary>
+<p>
 
-##### 7.理解es6 class构造以及继承的底层实现原理
+new 作为关键字会进行如下的操作：
 
+1. 创建一个空的简单JavaScript对象（即{}）；
+2. 链接该对象（即设置该对象的构造函数）到另一个对象 ；
+3. 将步骤1新创建的对象作为this的上下文 ；
+4. 如果该函数没有返回对象，则返回this。
 
-### 作用域和闭包
+```JS
+
+function objectFactory(Constructor){
+    var obj = new Object();
+    var args = Array.prototype.slice(1)
+    obj.__proto__ = Constructor.prototype;
+    var ret = Constructor.apply(obj,args);
+    return typeof ret === 'object' ? ret: obj;
+}
+
+```
+
+</p>
+</details>
+
+---
+
+##### 3.创建对象的方法以及他们的优缺点  难度：⭐️⭐️
+
+<details><summary><b>答案</b></summary>
+<p>
+
+详细的请看 《JavaScript 高级程序设计》
+[JavaScript 深入之创建对象的多种方式以及优缺点](https://github.com/mqyqingfeng/Blog/issues/15)
+
+</p>
+</details>
+
+---
+
+##### 4.实现继承的几种方式以及他们的优缺点  难度：⭐️⭐️
+
+<details><summary><b>答案</b></summary>
+<p>
+
+详细的请看 《JavaScript 高级程序设计》
+[JavaScript深入之继承的多种方式和优缺点](https://github.com/mqyqingfeng/Blog/issues/16)
+</p>
+</details>
+
+---
+
+##### 5.理解es6 class构造以及继承的底层实现原理 难度：⭐️⭐️⭐️
+
+<details><summary><b>答案</b></summary>
+<p>
+
+[ES6 系列之 Babel 是如何编译 Class 的(上)](https://github.com/mqyqingfeng/Blog/issues/105)
+
+[ES6 系列之 Babel 是如何编译 Class 的(下)](https://github.com/mqyqingfeng/Blog/issues/106)
+
+</p>
+</details>
+
+---
+
+#### 作用域和闭包
 
 
 ##### 1.理解词法作用域和动态作用域
+
+
 
 
 ##### 2.理解JavaScript的作用域和作用域链
