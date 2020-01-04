@@ -14,8 +14,8 @@
 1. JavaScript 基础这块推荐去看下 @冴羽 大大的博客，可以帮你系统的学习。[链接地址](https://github.com/mqyqingfeng/Blog)。
 
 **推荐书单：**
-1. JavaScript 高级程序设计
-2. 深入理解ES6
+1. [JavaScript高级程序设计](https://book.douban.com/subject/10546125/)
+2. [深入理解ES6](https://book.douban.com/subject/27072230/)
 
 ## 知识清单
 
@@ -325,6 +325,7 @@ function objectFactory(Constructor){
 <p>
 
 详细的请看 《JavaScript 高级程序设计》
+
 [JavaScript 深入之创建对象的多种方式以及优缺点](https://github.com/mqyqingfeng/Blog/issues/15)
 
 </p>
@@ -338,6 +339,7 @@ function objectFactory(Constructor){
 <p>
 
 详细的请看 《JavaScript 高级程序设计》
+
 [JavaScript深入之继承的多种方式和优缺点](https://github.com/mqyqingfeng/Blog/issues/16)
 </p>
 </details>
@@ -361,30 +363,280 @@ function objectFactory(Constructor){
 #### 作用域和闭包
 
 
-##### 1.理解词法作用域和动态作用域
+##### 1.理解词法作用域和动态作用域  难度：⭐️⭐️
+
+<details><summary><b>答案</b></summary>
+<p>
+
+## 作用域
+
+作用域是指程序源代码中定义变量的区域。
+
+作用域规定了如何查找变量，也就是确定当前执行代码对变量的访问权限。
+
+JavaScript 采用词法作用域(lexical scoping)，也就是静态作用域。
+
+### 词法作用域
+
+函数的作用域在函数定义的时候就决定了。JavaScript 采用的是词法作用域。
+
+### 动态作用域
+
+函数的作用域是在函数调用的时候才决定的。
+
+## 示例
+
+```JS
+var name ="logic"
+
+function getName(){
+  return name;
+}
+
+function getNameWrap(){
+  var name = 'wind'
+  return getName()
+}
+
+console.log(getNameWrap()) // 输出 logic 。因为 JavaScript 是词法作用域，在函数定义时就确定了变量的访问。 
+
+```
+
+</p>
+</details>
+
+---
+
+##### 2.理解变量对象(活动对象)  难度：⭐️⭐️⭐️
+
+<details><summary><b>答案</b></summary>
+<p>
+
+变量对象是与执行上下文相关的数据作用域，存储了在上下文中定义的变量和函数。
+
+全局对象：是宿主环境预定义的对象，作为 JavaScript 的全局函数和全局属性的占位符。通过使用全局对象，可以访问所有其他所有预定义的对象、函数和属性。全局上下文中的变量对象就是全局对象，即全局对象是作用域链的头。
+
+执行上下文的代码会分成两个阶段进行处理： 分析(通过 arguments 属性初始化)和执行
+
+### 分析
+
+1. 函数的所有形参
+   1. 由名称和对应值组成的一个变量对象的属性创建
+   2. 没有实参，属性值设为 undefined
+2. 函数声明
+   1. 由名称和对应值组成一个变量对象的属性
+   2. 如果变量名已经存在，直接替换该属性
+3. 变量声明
+   1. 由名称和对应值( undefined ) 组成一个变量对象的属性创建
+   2. 如果变量名称已经声明的形参或函数相同，则变量声明无效
+
+### 执行
+
+  在代码执行阶段，会顺序执行代码，根据代码，修改变量对象的值。
+
+### 示例
+
+```JS
+function foo(a,b){
+  var a = 2;
+  function c(){};
+  var d = function (){}
+}
+foo(1)
+// 分析阶段
+AO = {
+  arguments:{
+    0: 1,
+    1: undefined,
+    length: 2
+  },
+  a: 1,
+  b: undefined,
+  c: reference to function c(){},
+  d: undefined
+}
+
+// 代码执行
+AO = {
+  arguments:{
+    0: 1,
+    1: undefined,
+    length: 2
+  },
+  a: 2,
+  b: undefined,
+  c: reference to function c(){},
+  d: reference to FunctionExpression "d"
+}
+
+```
+
+</p>
+</details>
+
+---
+
+##### 3.理解JavaScript的作用域链   难度：⭐️⭐️⭐️
+
+<details><summary><b>答案</b></summary>
+<p>
+
+**定义**： 当查找变量的时候，会先从当前上下文的变量查找，如果没有找到，就从父级（词法层面的父级）执行上下文的变量对象查找，一直找到全局上下文的变量对象，也就是全局对象。由多个执行上下文的变量对象构成的链，就是作用域链。
+
+**用途**： 保证对执行环境有权访问的所有变量和函数的有序访问。
+
+### 函数式如何保存自己的作用域链
+
+函数有一个内部属性 [[scope]] ,当函数创建的时候，就会保存所有的父变量对象到其中。
+
+[[scope]] 可以理解为所有父级变量对象的层级链
+
+### 示例
+
+```JS
+function foo(){
+  function bar(){
+    ...
+  }
+}
+
+// 函数创建时
+
+foo.[[scope]] = [
+  globalContext.VO
+]
+
+bar.[[scope]] = [
+  fooContext.AO,
+  globalContext.VO
+]
+```
+
+</p>
+</details>
+
+---
+
+
+##### 4.this的原理以及几种不同使用场景的取值  难度：⭐️⭐️⭐️
+
+<details><summary><b>答案</b></summary>
+<p>
+
+### 显示绑定
+
+call、apply、bind 可以显示的修改函数的 this 指向
+
+### 隐士绑定
+
+1. 全局上下文
+   1. this 指向 window,严格模式下为 undefined
+2. 直接调用函数
+   1. this 指向 window,严格模式下为 undefined
+3. 作为对象的方法调用
+   1. obj.foo()。 this 指向对象 obj
+4. DOM 事件的绑定
+   1. onclick和addEventerListener中 this 默认指向绑定事件的元素。
+5. new 构造函数绑定
+   1. 构造函数中的 this 指向实例对象
+6. 箭头函数
+   1. 箭头函数没有 this, 因此也不能绑定。
+   2. 在箭头函数里的 this 会指向 外层的非箭头函数的 this。
+
+### this 的原理
+
+[JavaScript深入之从ECMAScript规范解读this](https://github.com/mqyqingfeng/Blog/issues/7)
+
+</p>
+</details>
+
+---
+
+##### 5.理解JavaScript的执行上下文和执行上下文栈 难度：⭐️⭐️⭐️
+
+<details><summary><b>答案</b></summary>
+<p>
+
+### 执行上下文
+
+当 JavaScript 代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。
+
+执行上下有三个重要属性(也就是前面 3 题所说的内容)
+
+1. 变量对象
+2. 作用域链
+3. this
+
+**执行代码**
+
+1. 全局代码
+2. 函数
+3. eval 
+
+### 执行上下文栈
+
+每个函数都会创建执行上下文，执行上下文栈（Execution context stack，ECS）就是 JavaScript 引擎创建出来管理执行上下文的。
+
+执行上下文栈是有全局上下文初始化，由于执行代码首先是全局代码。全局上下文永远在执行上下文栈中的最底下，只有等程序关闭才释放。
+
+#### 示例
+
+``` JS
+function foo(){
+  function bar(){}
+  bar()
+}
+foo()
+
+// 假设 ECS 是个数组
+// 第一步 初始化， 全局代码的上下文 globalContext
+ECS = [
+  globalContext
+]
+
+// 第二步 执行 foo
+
+ECS = [
+  globalContext,
+  fooContext
+]
+// 第三步 执行 bar
+
+ECS = [
+  globalContext,
+  fooContext,
+  barContext
+]
+
+//第四步 bar 执行完成, 释放 barContext
+ECS = [
+  globalContext,
+  fooContext
+]
+
+// 第五步 foo 执行完成, 释放 fooContext
+ECS = [
+  globalContext
+]
+
+```
+
+</p>
+</details>
+
+---
+
+##### 6.闭包的实现原理和作用，可以列举几个开发中闭包的实际应用  难度：⭐️⭐️⭐️
+
+
+##### 7.理解堆栈溢出和内存泄漏的原理，如何防止
+
+
+##### 8.如何处理循环的异步操作
 
 
 
-
-##### 2.理解JavaScript的作用域和作用域链
-
-
-##### 3.理解JavaScript的执行上下文栈，可以应用堆栈信息快速定位问题
-
-
-##### 4.this的原理以及几种不同使用场景的取值
-
-
-##### 5.闭包的实现原理和作用，可以列举几个开发中闭包的实际应用
-
-
-##### 6.理解堆栈溢出和内存泄漏的原理，如何防止
-
-
-##### 7.如何处理循环的异步操作
-
-
-##### 8.理解模块化解决的实际问题，可列举几个模块化方案并理解其中原理
+##### 9.理解模块化解决的实际问题，可列举几个模块化方案并理解其中原理
 
 
 ### 执行机制
