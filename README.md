@@ -775,3 +775,165 @@ document.body.removeChild(button);
 
 ##### 7.JavaScript异常处理的方式，统一的异常处理方案
 
+---
+
+## 二、HTML和CSS
+
+### HTML
+
+1.从规范的角度理解HTML，从分类和语义的角度使用标签
+
+
+2.常用页面标签的默认样式、自带属性、不同浏览器的差异、处理浏览器兼容问题的方式
+
+
+3.元信息类标签(head、title、meta)的使用目的和配置方法
+
+
+4.HTML5离线缓存原理
+
+
+### CSS
+
+
+##### 1.CSS盒模型，在不同浏览器的差异  难度：⭐️
+
+<details><summary><b>答案</b></summary>
+<p>
+
+- 定义了盒的四个部分 —— margin, border, padding, and content
+- 标准盒模型 
+  - 如果你给盒设置 `width` 和 `height`，实际设置的是 *content box*。 padding 和 border 再加上设置的宽高一起决定整个盒子的大小。
+- IE盒模型（box-sizing: border-box）
+  - 如果你给盒设置 `width` 和 `height`，包含了content box + padding + border
+
+</p>
+</details>
+
+2.BFC实现原理，可以解决的问题，如何创建BFC 难度：⭐️⭐️
+
+<details><summary><b>答案</b></summary> 
+<p>
+
+- 参考文章 [10 分钟理解 BFC 原理](https://zhuanlan.zhihu.com/p/25321647), [CSS深入理解流体特性和BFC特性下多栏自适应布局](https://www.zhangxinxu.com/wordpress/2015/02/css-deep-understand-flow-bfc-column-two-auto-layout/)
+
+- 特性：具有 BFC 特性的元素可以看作是隔离了的独立容器，容器里面的元素不会在布局上影响到外面的元素，并且 BFC 具有普通容器所没有的一些特性。
+- 如何产生 BFC
+  - 浮动元素（非 float: none）
+  - 绝对定位元素（position: absolute || fixed）
+  - 行内元素（display: inline-block）
+  - 表格元素 （display: table-cell || table-caption）
+  - overflow 值不为 visible 元素
+  - 弹性元素： display: flex
+  - 网格元素： display: grid
+- BFC 实际用途
+  - 清除浮动
+  - 解除外边距折叠
+  - 自适应布局: 左浮动 + bfc overflow: hidden;
+
+</p>
+</details>
+
+---
+
+3.水平垂直居中的方案、可以实现6种以上并对比它们的优缺点 难度：⭐️⭐️
+<details><summary><b>答案</b></summary> 
+<p>
+
+- 参考文章：[水平垂直居中](https://github.com/yanhaijing/vertical-center)，[16种方法实现水平居中垂直居中](https://juejin.im/post/58f818bbb123db006233ab2a)
+- 居中元素定宽高
+  - absolute + 负 margin + top:50%; left:50%;
+  - absolute + margin:auto + top:0;left: 0;bottom:0; right:0;
+  - absolute + cacl(50%- el.width)
+- 居中元素不定宽高
+  - absolute + transform: translate(-50%, -50%)
+  - 父元素设置： wirting-mode: vertical-lr;text-align: center: 子元素包一层设置 wirting-mode: horizontal-tb;text-aligin: center;
+  - 父元素设置： line-height: 300px;子元素设置： display: inline-block;
+  - 父元素设置： display: table-cell; vertical-align: middle; 
+  - 父元素设置： display: flex; justify-content:center;align-items:center;
+  - 父元素设置:   display: grid; 子元素设置： align-self: center; justify-self: center;
+
+</p>
+</details>
+
+---
+
+
+4.PostCSS、Sass、Less的异同，以及使用配置，至少掌握一种
+
+
+5.CSS模块化方案、如何配置按需加载、如何防止CSS阻塞渲染
+
+
+6.掌握一套完整的响应式布局方案
+
+
+## 三、计算机基础
+
+> 关于编译原理，不需要理解非常深入，但是最基本的原理和概念一定要懂，这对于学习一门编程语言非常重要
+
+### 编译原理
+
+
+1.理解代码到底是什么，计算机如何将代码转换为可以运行的目标程序
+
+
+2.正则表达式的匹配原理和性能优化
+
+
+3.如何将JavaScript代码解析成抽象语法树(AST)
+
+
+4.base64的编码原理
+
+
+5.几种进制的相互转换计算方法，在JavaScript中如何表示和转换
+
+
+### 网络协议
+
+1.理解什么是协议，了解TCP/IP网络协议族的构成，每层协议在应用程序中发挥的作用
+
+
+2.三次握手和四次挥手详细原理，为什么要使用这种机制
+
+
+3.有哪些协议是可靠，TCP有哪些手段保证可靠交付
+
+
+4.DNS的作用、DNS解析的详细过程，DNS优化原理
+
+
+5.CDN的作用和原理
+
+
+6.HTTP请求报文和响应报文的具体组成，能理解常见请求头的含义，有几种请求方式，区别是什么
+
+
+7.HTTP所有状态码的具体含义，看到异常状态码能快速定位问题
+
+
+8.HTTP1.1、HTTP2.0带来的改变
+
+
+9.HTTPS的加密原理，如何开启HTTPS，如何劫持HTTPS请求
+
+
+10.理解WebSocket协议的底层原理、与HTTP的区别
+
+
+### 设计模式
+
+
+1.熟练使用前端常用的设计模式编写代码，如单例模式、装饰器模式、代理模式等
+
+
+2.发布订阅模式和观察者模式的异同以及实际应用
+
+
+3.可以说出几种设计模式在开发中的实际应用，理解框架源码中对设计模式的应用
+
+作者：ConardLi
+链接：https://juejin.im/post/5cc1da82f265da036023b628
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
