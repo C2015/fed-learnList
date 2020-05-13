@@ -47,7 +47,7 @@ JavaScript语言类型分为两类：基础类型和引用类型；
 
 <details><summary><b>答案</b></summary>
 <p>
-  这题难度有点大，看不明白可以先跳过。[从Chrome源码看JS Object的实现](https://zhuanlan.zhihu.com/p/26169639)
+  这题难度有点大，看不明白可以先跳过。[从Chrome源码看JS Object的实现](https://zhuanlan.zhihu.com/p/26169639)，[V8中的快速属性访问](https://blog.csdn.net/szengtal/article/details/79054762)
 </p>
 </details>
 
